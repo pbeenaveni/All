@@ -5,9 +5,9 @@ metadata:
   name: hello-pod
 spec: 
   containers:
-    - name: hello-pod
-      image: alpine
-      args:
-        - /bin/bash
-        - -c
-        - sleep 1d
+    - name: web
+      image: httpd
+      ports:
+        - name: web
+          containerPort: 80
+          protocol: TCP
