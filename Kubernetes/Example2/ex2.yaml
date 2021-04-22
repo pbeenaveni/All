@@ -4,7 +4,7 @@ kind: Pod
 metadata: 
   name: example2-pod
 spec:
-  container:
+  containers:
     - image: httpd
       name: web-server
       ports:
