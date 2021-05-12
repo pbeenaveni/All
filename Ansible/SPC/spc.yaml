@@ -25,4 +25,4 @@
         owner: springbootuser
         path: /usr/share/springpetclinic/spring-petclinic-2.4.2.jar
         mode: '500'
-        state: present
+        state: file
