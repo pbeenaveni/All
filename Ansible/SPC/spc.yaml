@@ -1,0 +1,10 @@
+---
+- name: Deploying spring boot application on linux server
+  hosts: appserver
+  become: yes
+  tasks:
+    - name: Update ubuntu packages and inatalling java
+      apt:
+        name: openjdk-11-jdk 
+        update_cache: yes
+        state: present
