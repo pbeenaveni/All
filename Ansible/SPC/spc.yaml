@@ -26,3 +26,12 @@
         path: /usr/share/springpetclinic/spring-petclinic-2.4.2.jar
         mode: '500'
         state: file
+    - name: copying service file to remote
+      copy:
+        src: springpetclinic.service
+        dest: /etc/systemd/system/springpetclinic.service
+    - name: Enable and start springpetclinic service
+      systemd:
+        name: springpetclinic.service
+        enabled: yes
+        state: started
