@@ -10,9 +10,13 @@
     appuser: springbootuser
     test: Id2
   tasks:
+    - name: Dubugger for vars
+      debug: java_package
+        var: 
     - name: Update ubuntu packages and inatalling java
       apt:
         name: "{{ java_package }}"
+        debug
         update_cache: yes
         state: present
     - name: Making directory 
