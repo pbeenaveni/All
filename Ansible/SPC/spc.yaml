@@ -11,25 +11,25 @@
   tasks:
     - name: Update ubuntu packages and inatalling java
       apt:
-        name: {{ java_package }} 
+        name: "{{ java_package }}"
         update_cache: yes
         state: present
     - name: Making directory 
       file: 
-        path: {{ app_dir }}
+        path: "{{ app_dir }}"
         state: directory
     - name: Downloading the application to the path
       get_url:
-        url: {{ package_url }}
-        dest: {{ app_file }}
+        url: "{{ package_url }}"
+        dest: "{{ app_file }}"
     - name: Adding user
       user:
-        name: {{ appuser }}
-        password: {{ appuser }}
+        name: "{{ appuser }}"
+        password: "{{ appuser }}"
     - name: Adding permission to user
       file: 
-        owner: {{ appuser }}
-        path: {{ app_file }}
+        owner: "{{ appuser }}"
+        path: "{{ app_file }}"
         mode: '500'
         state: file
     - name: copying service file to remote
