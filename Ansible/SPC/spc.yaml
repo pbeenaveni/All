@@ -13,7 +13,6 @@
     - name: Update ubuntu packages and inatalling java
       apt:
         name: "{{ java_package }}"
-        debug
         update_cache: yes
         state: present
     - name: Making directory 
