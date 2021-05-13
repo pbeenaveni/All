@@ -2,28 +2,34 @@
 - name: Deploying spring boot application on linux server
   hosts: appserver
   become: yes
+  vars:
+    java_package: openjdk-11-jdk
+    app_dir: /usr/share/springpetclinic/
+    package_url: https://referenceapplicationskhaja.s3-us-west-2.amazonaws.com/spring-petclinic-2.4.2.jar
+    app_file: /usr/share/springpetclinic/spring-petclinic-2.4.2.jar
+    appuser: springbootuser
   tasks:
     - name: Update ubuntu packages and inatalling java
       apt:
-        name: openjdk-11-jdk 
+        name: {{ java_package }} 
         update_cache: yes
         state: present
     - name: Making directory 
       file: 
-        path: /usr/share/springpetclinic/
+        path: {{ app_dir }}
         state: directory
     - name: Downloading the application to the path
       get_url:
-        url: https://referenceapplicationskhaja.s3-us-west-2.amazonaws.com/spring-petclinic-2.4.2.jar
-        dest: /usr/share/springpetclinic/spring-petclinic-2.4.2.jar
+        url: {{ package_url }}
+        dest: {{ app_file }}
     - name: Adding user
       user:
-        name: springbootuser
-        password: springbootuser
+        name: {{ appuser }}
+        password: {{ appuser }}
     - name: Adding permission to user
       file: 
-        owner: springbootuser
-        path: /usr/share/springpetclinic/spring-petclinic-2.4.2.jar
+        owner: {{ appuser }}
+        path: {{ app_file }}
         mode: '500'
         state: file
     - name: copying service file to remote
