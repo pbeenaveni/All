@@ -10,24 +10,21 @@
     appuser: springbootuser
     #test_var: Id2
   tasks:
-    - name: debug java package name
-      debug: 
-        var: java_package
-    - name: debug test_var1 name
-      debug: 
-        var: test_var1
-    - name: debug test_var2 name
-      debug: 
-        var: test_var2
     - name: Update ubuntu packages and inatalling java
       apt:
         name: "{{ java_package }}"
         update_cache: yes
         state: present
+    - name: debug msg for java
+      debug: 
+        msg: java is succesfully installed
     - name: Making directory 
       file: 
         path: "{{ app_dir }}"
         state: directory
+    - name: debug msg for created directory
+      debug: 
+        msg: app directory is created
     - name: Downloading the application to the path
       get_url:
         url: "{{ package_url }}"
