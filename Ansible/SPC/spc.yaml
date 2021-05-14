@@ -10,6 +10,10 @@
     appuser: springbootuser
     #test_var: Id2
   tasks:
+    - name: fail the execution if the distrubution is not ubuntu
+      fail:
+        msg: this is not an ubuntu machine
+      when: ansible_facts['distrubution'] != "Ububtu"
     - name: Update ubuntu packages and inatalling java
       apt:
         name: "{{ java_package }}"
