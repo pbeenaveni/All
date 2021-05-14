@@ -1,1 +1,2 @@
-test_var2=From hosts file
+---
+test_var2: From hosts file

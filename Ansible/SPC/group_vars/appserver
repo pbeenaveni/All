@@ -1,1 +1,2 @@
-test_var1=From Group vars
+---
+test_var2: From groups file
