@@ -13,9 +13,6 @@
     - name: debug java package name
       debug: 
         var: java_package
-    - name: debug test_var name
-      debug: 
-        var: test_var
     - name: Update ubuntu packages and inatalling java
       apt:
         name: "{{ java_package }}"
