@@ -13,7 +13,7 @@
     - name: fail the execution if the distrubution is not ubuntu
       fail:
         msg: this is not an ubuntu machine
-      when: ansible_facts['distribution'] != "Ububtu"
+      when: ansible_facts['distribution'] != "Ubuntu"
     - name: Update ubuntu packages and inatalling java
       apt:
         name: "{{ java_package }}"
