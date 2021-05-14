@@ -8,11 +8,14 @@
     package_url: https://referenceapplicationskhaja.s3-us-west-2.amazonaws.com/spring-petclinic-2.4.2.jar
     app_file: /usr/share/springpetclinic/spring-petclinic-2.4.2.jar
     appuser: springbootuser
-    test_var: Id2
+    #test_var: Id2
   tasks:
     - name: debug java package name
       debug: 
         var: java_package
+    - name: debug test_var name
+      debug: 
+        var: test_var
     - name: Update ubuntu packages and inatalling java
       apt:
         name: "{{ java_package }}"
