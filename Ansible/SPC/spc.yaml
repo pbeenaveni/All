@@ -15,16 +15,14 @@
         name: "{{ java_package }}"
         update_cache: yes
         state: present
-    - name: debug msg for java
-      debug: 
-        msg: java is succesfully installed
+      notify:
+        - debug msg for java
     - name: Making directory 
       file: 
         path: "{{ app_dir }}"
         state: directory
-    - name: debug msg for created directory
-      debug: 
-        msg: app directory is created
+      notify:
+        - debug msg for created directory
     - name: Downloading the application to the path
       get_url:
         url: "{{ package_url }}"
@@ -33,12 +31,8 @@
       user:
         name: "{{ appuser }}"
         password: "{{ appuser }}"
-    - name: Adding permission to user
-      file: 
-        owner: "{{ appuser }}"
-        path: "{{ app_file }}"
-        mode: '500'
-        state: file
+      notify:
+        - permissions for a file
     - name: copying service file to remote
       copy:
         src: springpetclinic.service
@@ -48,3 +42,18 @@
         name: springpetclinic.service
         enabled: yes
         state: started
+  handlers:
+    - name: permissions for a file
+      file: 
+        owner: "{{ appuser }}"
+        path: "{{ app_file }}"
+        mode: '500'
+        state: file
+    - name: debug msg for java
+      debug: 
+        msg: java is succesfully installed
+    - name: debug msg for created directory
+      debug: 
+        msg: app directory is created
+    
+      
