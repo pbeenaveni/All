@@ -10,6 +10,12 @@
     appuser: springbootuser
     test: Id2
   tasks:
+    - name: debug java package name
+      debug: 
+        var: java_package
+    - name: debug test name
+      debug: 
+        var: test
     - name: Update ubuntu packages and inatalling java
       apt:
         name: "{{ java_package }}"
