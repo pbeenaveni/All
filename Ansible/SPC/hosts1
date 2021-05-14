@@ -3,7 +3,8 @@ all:
         172.31.40.39:
         172.31.34.25:
         localhost:
-    appserver:
-        hosts:
-            172.31.40.39:
-            172.31.34.25:
+    children:
+        appserver:
+            hosts:
+                172.31.40.39:
+                172.31.34.25:
