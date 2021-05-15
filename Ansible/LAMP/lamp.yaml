@@ -1,11 +1,11 @@
 ---
 - name: Creating LAMP stack
-- hosts: lampserver
-- become: yes
-- vars: 
-  php_pac: php
-  mysql_pac: php-mysql
-- tasks:
+  hosts: lampserver
+  become: yes
+  vars: 
+    php_pac: php
+    mysql_pac: php-mysql
+  tasks:
   - name: installing packages
     package:
       name: 
