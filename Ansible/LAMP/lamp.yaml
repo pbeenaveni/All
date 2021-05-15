@@ -9,10 +9,10 @@
   - name: installing packages
     package:
       name: 
-        - {{ server_ins }} 
-        - {{ php_pac }} 
-        - {{ php_cli }} 
-        - {{ mysql_pac }}
+        - "{{ server_ins }}" 
+        - "{{ php_pac }}" 
+        - "{{ php_cli }}"
+        - "{{ mysql_pac }}"
       state: present
   - name: creating file
     copy:
@@ -20,6 +20,6 @@
       dest: /var/www/html/info.php
   - name: enabling and starting services
     systemd:
-      name: {{ service_name }}
+      name: "{{ service_name }}"
       enabled: yes
       state: started
