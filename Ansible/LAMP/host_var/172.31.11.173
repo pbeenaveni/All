@@ -1,0 +1,4 @@
+---
+server_ins: apache2
+php_cli: php-cli
+service_name: apache2

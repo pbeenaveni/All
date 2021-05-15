@@ -1,0 +1,25 @@
+---
+- name: Creating LAMP stack
+- hosts: lampserver
+- become: yes
+- vars: 
+  php_pac: php
+  mysql_pac: php-mysql
+- tasks:
+  - name: installing packages
+    package:
+      name: 
+        - {{ server_ins }} 
+        - {{ php_pac }} 
+        - {{ php_cli }} 
+        - {{ mysql_pac }}
+      state: present
+  - name: creating file
+    copy:
+      src: info.php
+      dest: /var/www/html/info.php
+  - name: enabling and starting services
+    systemd:
+      name: {{ service_name }}
+      enabled: yes
+      state: started

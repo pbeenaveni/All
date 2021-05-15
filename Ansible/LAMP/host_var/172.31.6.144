@@ -1,0 +1,4 @@
+---
+server_ins: httpd
+php_cli: php-fpm
+service_name: httpd
