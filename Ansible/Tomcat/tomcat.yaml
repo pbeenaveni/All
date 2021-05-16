@@ -19,7 +19,7 @@
         shell: /bin/false
         password: "tomcat"
         home: /opt/tomcat tomcat
-    - name: making tomcat directory 
+    - name: making temporary directory 
       file:
         path: temp
         group: tomcat
