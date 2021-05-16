@@ -19,10 +19,16 @@
         shell: /bin/false
         password: "tomcat"
         home: /opt/tomcat tomcat
+    - name: making tomcat directory 
+      file:
+        path: temp
+        group: tomcat
+        owner: tomcat
+        state: directory
     - name: downloading the tomcat application
       get_url:
         url: https://apachemirror.wuchna.com/tomcat/tomcat-9/v9.0.46/bin/apache-tomcat-9.0.46.tar.gz
-        dest: /tmp/apache-tomcat-9.0.46.tar.gz
+        dest: /temp/apache-tomcat-9.0.46.tar.gz
     - name: making tomcat directory 
       file:
         path: /opt/tomcat
@@ -33,7 +39,7 @@
       unarchive:
         group: tomcat
         owner: tomcat
-        src: /tmp/apache-tomcat-9.0.46.tar.gz
+        src: /temp/apache-tomcat-9.0.46.tar.gz
         dest: /opt/tomcat/
     - name: Adding the read permissions to conf file
       file: 
