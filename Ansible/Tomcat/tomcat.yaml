@@ -6,9 +6,8 @@
     java_package: default-jdk
   tasks:
     - name: Updating apt and installing java
-      apt: 
+      package: 
         name: "{{ java_package }}"
-        update_cache: yes
         state: present
     - name: adding group
       group: 
