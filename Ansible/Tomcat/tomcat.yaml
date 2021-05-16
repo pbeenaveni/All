@@ -1,0 +1,85 @@
+---
+- name: Installing tomcat application
+  hosts: all
+  become: yes
+  vars:
+    java_package: default-jdk
+  tasks:
+    - name: Updating apt and installing java
+      apt: 
+        name: "{{ java_package }}"
+        update_cache: yes
+        state: present
+    - name: adding group
+      group: 
+        name: tomcat
+    - name: adding user to the group
+      user: 
+        name: tomcat
+        group: tomcat
+        shell: /bin/false
+        password: "tomcat"
+        home: /opt/tomcat tomcat
+    - name: downloading the tomcat application
+      get_url:
+        url: https://apachemirror.wuchna.com/tomcat/tomcat-9/v9.0.46/bin/apache-tomcat-9.0.46.tar.gz
+        dest: /tmp/apache-tomcat-9.0.46.tar.gz
+    - name: making tomcat directory 
+      file:
+        path: /opt/tomcat
+        group: tomcat
+        owner: tomcat
+        state: directory
+    - name: unzipping the tar file
+      unarchive:
+        group: tomcat
+        owner: tomcat
+        src: /tmp/apache-tomcat-9.0.46.tar.gz
+        dest: /opt/tomcat/
+    - name: Adding the read permissions to conf file
+      file: 
+        path: /opt/tomcat/conf
+        group: tomcat
+        owner: tomcat
+        mode: g+r
+        recurse: yes
+    - name: Adding the exec permissions to conf file
+      file: 
+        path: /opt/tomcat/conf
+        group: tomcat
+        owner: tomcat
+        mode: g+x
+    - name: changing ownership of the directory webapps
+      file: 
+        path: /opt/tomcat/webapps
+        group: tomcat
+        owner: tomcat
+        recurse: yes
+    - name: changing ownership of the directory work
+      file: 
+        path: /opt/tomcat/work
+        group: tomcat
+        owner: tomcat
+        recurse: yes
+    - name: changing ownership of the directory temp
+      file: 
+        path: /opt/tomcat/temp
+        group: tomcat
+        owner: tomcat
+        recurse: yes
+    - name: changing ownership of the directory logs
+      file: 
+        path: /opt/tomcat/logs
+        group: tomcat
+        owner: tomcat
+        recurse: yes
+    - name: copying the tomcat.service file
+      copy:
+        src: tomcat.service
+        path: /etc/systemd/system/tomcat.service
+    - name: enabling and staring service
+      systemd:
+        name: tomcat.service
+        enabled: yes
+        state: started
+        demon_reload: yes
