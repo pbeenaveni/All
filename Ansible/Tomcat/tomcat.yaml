@@ -26,13 +26,9 @@
     - name: making tomcat directory 
       file:
         path: /opt/tomcat
-        group: tomcat
-        owner: tomcat
         state: directory
     - name: unzipping the tar file
       unarchive:
-        group: tomcat
-        owner: tomcat
         src: /tmp/apache-tomcat-9.0.46.tar.gz
         dest: /opt/tomcat/
     - name: Adding the read permissions to conf file
